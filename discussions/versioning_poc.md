@@ -15,9 +15,8 @@ Issue Reference: [#1329](https://github.com/mojaloop/project/issues/1329)
 
 As a hub operator I want a series of simple steps to run a zero downtime deployment of a mojaloop upgrade so I can easily understand and execute these steps.
 
-
 For simplicity, let's assume the following:
-  - 3 `mojaloop/helm` versions: `1.0.0`, `1.1.0`, and `1.2.0`
+  - 3 `mojaloop/helm` versions: `1.0.0`, `1.0.1`, `1.0.2`, `2.0.0`, `2.0.1`
     - `2.0.0` is an intermediary helm version we use to get from `1.0.0` to `2.1.0`?
   - `helm3`, kubernetes `v?`
 
@@ -68,8 +67,14 @@ DB Schema Version: `v1.0.0`
 
 ### Background
 ```bash
-helm install ...
-#todo: all the steps to just get everything running for v1.0.0
+# add the repo version
+helm repo add mojaloop http://docs.mojaloop.io/helm/repo/
+
+# list available versions
+helm search repo -l mojaloop/mojaloop
+
+# I'm aware there is no 1.0.0 here, but just for demonstration purposes
+helm --namespace ml_app --name ml_release install mojaloop/mojaloop --version 1.0.0
 ```
 
 ### General Tips:
@@ -83,22 +88,30 @@ helm install ...
 
 > In order to fully upgrade the Mojaloop deployment from `v1.0.0` -> `v2.0.1`, we must go through a number of incremental helm upgrades, each of which is forwards and backwards compatible
 
-<!-- #todo: api gateway instructions, drain the transfers -->
 <!-- #todo: look at the actual underlying deployment object in kube -->
 
+Before each step, verify the versions are published to the helm repo:
+```bash
+# get the latest helm updates
+helm repo update
+
+# list available versions
+helm search repo -l mojaloop/mojaloop
+```
 
 ```bash
 # apply the db schema changes: optional `quoteId` column
-helm upgrade mojaloop --version v1.0.1 --reuse-values
+helm upgrade ml_release mojaloop/mojaloop --version v1.0.1 --reuse-values
 
 # add support for v2.0 API
-helm upgrade mojaloop --version v1.0.2 --reuse-values
+helm upgrade ml_release mojaloop/mojaloop --version v1.0.2 --reuse-values
 
 # drop support for v1.X API
-helm upgrade mojaloop --version v2.0.0 --reuse-values
+# TODO: need to drain v1.X connections before this point
+helm upgrade ml_release mojaloop/mojaloop --version v2.0.0 --reuse-values
 
 # apply final db schema changes: required `quoteId` column
-helm upgrade mojaloop --version v2.0.1 --reuse-values
+helm upgrade ml_release mojaloop/mojaloop --version v2.0.1 --reuse-values
 ```
 
 ### Rollback
