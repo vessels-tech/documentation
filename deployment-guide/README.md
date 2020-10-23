@@ -15,16 +15,23 @@ The document is intended for an audience with a stable technical knowledge that 
   
 ### 1. Pre-requisites
 
-A list of the pre-requisite tool set required for the deployment of Mojaloop;
+Versions numbers below are hard requirements, not just recommendations (more recent versions are known not to work).
+
+A list of the pre-requisite tool set required for the deployment of Mojaloop:
 - **Kubernetes** An open-source system for automating deployment, scaling, and management of containerized applications. Find out more about [Kubernetes](https://kubernetes.io),
-  - kubectl - Kubernetes CLI for Kubernetes Management is required. Find out more about [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/),
+   <br>_Recommended Versions:_
+   <br>&nbsp;&nbsp;&nbsp;&nbsp;_**Mojaloop Helm Chart release v11.x** supports **Kuberentes v1.13 - v1.17**, newer versions have not been tested._
+   <br>&nbsp;&nbsp;&nbsp;&nbsp;_**Mojaloop Helm Chart release v10.x** supports **Kuberentes v1.13 - v1.15**, it will fail on Kuberentes v1.16+ onwards due deprecated APIs ([ref: Helm Issue #219](https://github.com/mojaloop/helm/issues/219))._
+  - kubectl - Kubernetes CLI for Kubernetes Management is required. Find out more about [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/):
     - [Install-kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/),
-  - microk8s - MicroK8s installs a barebones upstream Kubernetes for a single node deployment generally used for local development. We recommend this installation on Linux (ubuntu) OS. Find out more about [microk8s](https://microk8s.io/) and [microk8s documents](https://microk8s.io/docs/),
+  - microk8s - MicroK8s installs a barebones upstream Kubernetes for a single node deployment generally used for local development. We recommend this installation on Linux (ubuntu) OS. Find out more about [microk8s](https://microk8s.io/) and [microk8s documents](https://microk8s.io/docs/):
     - [Install-microk8s](https://microk8s.io/docs/),
   - kubectx - Not required but useful. Find out more about [kubectx](https://github.com/ahmetb/kubectx),
   - kubetail - Not required but useful. Bash script that enables you to aggregate (tail/follow) logs from multiple pods into one stream. Find out more about [kubetail](https://github.com/johanhaleby/kubetail),
 - **Docker** Provides containerized environment to host the application. Find out more about [Docker](https://docker.com),
 - **Helm** A package manager for Kubernetes. Find out more about [Helm](https://helm.sh),
+   <br>_Recommended Versions:_
+   <br>&nbsp;&nbsp;&nbsp;&nbsp;_**Helm v3.x** ([ref: Design Auth Issue #52](https://github.com/mojaloop/design-authority/issues/52))._
 - **Postman** Postman is a Google Chrome application for the interacting with HTTP API's. It presents you with a friendly GUI for the construction requests and reading responces.	https://www.getpostman.com/apps. Find out more about [Postman](https://postman.com).
 
 For **local guides** on how to setup the pre-requisites on your laptop or desktop, refer to the appropriate link document below;
@@ -118,7 +125,7 @@ Insure **kubectl** is installed. A complete set of installation instruction are 
    Select **Token**. Generate a token to use there by: _Windows replace `grep` with `findstr`_
    
    ```bash
-   kubectl -n kube-system get secrets | grep dashboard-token
+   kubectl describe secret kubernetes-dashboard --namespace=kube-system
    ```
 
    The token to use is shown on the last line of the output of that command;
@@ -135,38 +142,34 @@ Insure **kubectl** is installed. A complete set of installation instruction are 
 
 Please review [Mojaloop Helm Chart](../repositories/helm.md) to understand the relationships between the deployed Mojaloop helm charts.
 
+Refer to the official documentation on how to install the latest version of Helm v3: https://helm.sh/docs/intro/install/
+
+Refer to the following document if are using Helm v2: [Deployment with (Deprecated) Helm v2](./helm-legacy-deployment.md)
+
+Refer to the [Helm v2 to v3 Migration Guide](./helm-legacy-migration.md) if you wish to migrate an existing Helm v2 deployment to v3.
+
 #### 4.1. Helm configuration
 
-1. Config Helm CLI and install Helm Tiller on K8s cluster:
-   ```bash
-   helm init
-   ```
-   _Note: if `helm init` fails with `connection refused error`, refer to [troubleshooting](./deployment-troubleshooting.md#helm_init_connection_refused)_
-
-2. Validate Helm Tiller is up and running. _Windows replace `grep` with `findstr`_:
-   ```bash
-   kubectl -n kube-system get po | grep tiller
-   ```
-
-3. Add mojaloop repo to your Helm config (optional). _Linux use with sudo_:
+1. Add mojaloop repo to your Helm config:
    ```bash
    helm repo add mojaloop http://mojaloop.io/helm/repo/
    ```
    If the repo already exists, substitute 'add' with 'apply' in the above command.
 
-4. Add the additional dependency Helm repositories. This is needed to resolve Helm Chart dependencies required by Mojaloop charts. Linux use with sudo;
+2. Add the additional dependency Helm repositories. This is needed to resolve Helm Chart dependencies required by Mojaloop charts.
    ```bash
    helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
    helm repo add kiwigrid https://kiwigrid.github.io
    helm repo add elastic https://helm.elastic.co
+   helm repo add bitnami https://charts.bitnami.com/bitnami 
    ```
 
-5. Update helm repositories. _Linux use with sudo_:
+3. Update helm repositories:
    ```bash
    helm repo update
    ```
 
-6. Install nginx-ingress for load balancing & external access. _Linux use with sudo_:
+4. Optionally Install nginx-ingress for load balancing & external access:
    ```bash
    helm --namespace kube-public install stable/nginx-ingress
    ```
@@ -175,32 +178,33 @@ Please review [Mojaloop Helm Chart](../repositories/helm.md) to understand the r
 
 #### 5.1. Mojaloop Helm Deployment
 
-1. Install Mojaloop. _Linux use with sudo_:
+1. Install Mojaloop:
 
    Default installation:
    ```bash
-   helm --namespace demo --name moja install mojaloop/mojaloop
+   helm --namespace demo install moja mojaloop/mojaloop
    ```
-   
+
    Version specific installation:
    ```bash
-   helm --namespace demo --name moja install mojaloop/mojaloop --version {version}
+   helm --namespace demo install moja mojaloop/mojaloop --version {version}
    ```
    
    List of available versions:
    ```bash
-   helm search -l mojaloop/mojaloop
+   helm search repo -l mojaloop/mojaloop
    ```
    
    Custom configured installation:
    ```bash
-   helm --namespace demo --name moja install mojaloop/mojaloop -f {custom-values.yaml}
+   helm --namespace demo install moja mojaloop/mojaloop -f {custom-values.yaml}
    ```
+
    _Note: Download and customize the [values.yaml](https://github.com/mojaloop/helm/blob/master/mojaloop/values.yaml). Also ensure that you are using the value.yaml from the correct version which can be found via [Helm Releases](https://github.com/mojaloop/helm/releases)._
 
 #### 5.2. Verifying Mojaloop Deployment
 
-1. Update your /ect/hosts for local deployment:
+1. Update your /etc/hosts for local deployment:
 
    _Note: This is only applicable for local deployments, and is not needed if custom DNS or ingress rules are configured in a customized [values.yaml](https://github.com/mojaloop/helm/blob/master/mojaloop/values.yaml)_.
    
@@ -250,7 +254,7 @@ Please, follow these instructions: [Get Postman](https://www.getpostman.com/post
 
 #### 6.2. Setup Postman
 
-Grab the latest collections & environment files from [Mojaloop Postman Github repo](https://github.com/mojaloop/postman): [https://github.com/mojaloop/postman](https://github.com/mojaloop/postman)
+Grab the latest collections & environment files from [Mojaloop Postman Github repo](https://github.com/mojaloop/postman).
  
 After an initial setup or new deployment, the [OSS New Deployment FSP Setup section](../contributors-guide/tools-and-technologies/automated-testing.md) needs to be completed. This will seed the Database with the required enumerations and static data to enable the sucessful execution of any manual or automation tests by the other collections.
 
