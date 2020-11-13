@@ -2,10 +2,10 @@
 
 ## Mojaloop API
 
-Documentation: [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }})
+<!-- Documentation: [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }}) -->
 
-* [Mojaloop API {{ book.importedVars.mojaloop.spec.version }} Specification](./mojaloop-api-specification.md)
-* [Swagger]({{ book.importedVars.mojaloop.spec.uri.api }})
+<!-- * [Mojaloop API {{ book.importedVars.mojaloop.spec.version }} Specification](./mojaloop-api-specification.md) -->
+<!-- * [Swagger]({{ book.importedVars.mojaloop.spec.uri.api }}) -->
 
 ### Versions
 
@@ -17,8 +17,8 @@ Documentation: [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.d
 
 Documentation: [Central-Ledger Service](../mojaloop-technical-overview/central-ledger/README.md)
 
-* [Central Ledger API {{ book.importedVars.central_ledger.spec.version }} Specification](./central-ledger-api-specification.md)
-* [Swagger]({{ book.importedVars.central_ledger.spec.uri.api }})
+<!-- * [Central Ledger API {{ book.importedVars.central_ledger.spec.version }} Specification](./central-ledger-api-specification.md) -->
+<!-- * [Swagger]({{ book.importedVars.central_ledger.spec.uri.api }}) -->
 
 ### Versions
 
@@ -31,8 +31,8 @@ Documentation: [Central-Ledger Service](../mojaloop-technical-overview/central-l
 
 Documentation: [Central-Settlements Service](../mojaloop-technical-overview/central-settlements/README.md)
 
-* [Central Settlements API {{ book.importedVars.settlement.spec.version }} Specification](./central-settlements-api-specification.md)
-* [Swagger]({{ book.importedVars.settlement.spec.uri.api }})
+<!-- * [Central Settlements API {{ book.importedVars.settlement.spec.version }} Specification](./central-settlements-api-specification.md) -->
+<!-- * [Swagger]({{ book.importedVars.settlement.spec.uri.api }}) -->
 
 ### Versions
 
@@ -45,14 +45,14 @@ Documentation: [Central-Settlements Service](../mojaloop-technical-overview/cent
 
 Documentation: [Account-Lookup Service](../mojaloop-technical-overview/account-lookup-service/README.md)
 
-* [ALS Oracle API {{ book.importedVars.als.oracle.spec.version }} Specification](./mojaloop-api-specification.md#tag-parties)
-* [Swagger]( {{ book.importedVars.als.oracle.spec.uri.api }} )
+<!-- * [ALS Oracle API {{ book.importedVars.als.oracle.spec.version }} Specification](./mojaloop-api-specification.md#tag-parties) -->
+<!-- * [Swagger]( {{ book.importedVars.als.oracle.spec.uri.api }} ) -->
 
 Notes:
-* ALS Oracle API is based on the [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }}) with the following main differences:
+<!-- * ALS Oracle API is based on the [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }}) with the following main differences: -->
   - Operations follow traditional REST API paradigms more strictly.
-  - Operations are **synchronous** with an immediate response unlike [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }}) which provides a responds via **asynchronous callbacks**.
-  - `PUT /participants` is to update existing records and not a Callback as per the [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }})
+  <!-- - Operations are **synchronous** with an immediate response unlike [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }}) which provides a responds via **asynchronous callbacks**. -->
+  <!-- - `PUT /participants` is to update existing records and not a Callback as per the [Mojaloop Specification]({{ book.importedVars.mojaloop.spec.uri.doc }}) -->
   - `GET /participants` response body returns a list of Participants, containing `currency`.
   - `POST /participants` request body includes the `currency` as part of each record. 
 
