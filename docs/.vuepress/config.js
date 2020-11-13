@@ -21,8 +21,8 @@ module.exports = {
             text: 'General',
             items: [
               { text: 'Up and Running With Mojaloop', link: '/getting_started/' },
-              { text: 'Contributing to Mojaloop', link: '/getting_started/' },
-              { text: 'Deploying with Kubernetes', link: '/getting_started/' },
+              { text: 'Contributing to Mojaloop', link: '/contributors-guide/new-contributor-checklist' },
+              { text: 'Deploying Mojaloop Locally', link: '/deployment-guide/' },
             ]
           },
           {
@@ -64,9 +64,14 @@ module.exports = {
     // This could very well be improved, I just want to get started
     // so we can compare the tools effectively
     sidebar: [
-      ['/home', 'Home'],
+      {
+        title: 'Home',
+        children: [
+          '/home',
+          ['/mojaloop-background', 'Background'],
+        ]
+      },
       ['/getting_started', 'Getting Started'],
-      ['/mojaloop-background', 'Background'],
       {
         title: 'Deployment Guide',
         path: '/deployment-guide/',
@@ -125,28 +130,38 @@ module.exports = {
         title: 'API Reference',
         path: '/api/',
         children: [
-          ['/api/mojaloop-api-specification', 'Mojaloop API Specification'],
-          ['/api/als-oracle-api-specification', 'ALS Oracle'],
-          ['/api/central-ledger-api-specification', 'Central Ledger API'],
-          ['/api/central-settlements-api-specification', 'Central Settlement API'],
-          // TODO: other docs
-
-          ['https://docs.mojaloop.io/mojaloop-specification/', 'Spec Documentation'],
-          ['https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html', 'FSPIOP API Definition']
+          {
+            title: 'Mojaloop APIs',
+            collapsable: false,
+            children: [
+              ['/api/mojaloop-api-specification', 'Mojaloop API Specification'],
+              ['https://docs.mojaloop.io/mojaloop-specification/', 'Spec Documentation'],
+              ['https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html', 'FSPIOP API Definition']
+            ]
+          },
+          {
+            title: 'Internal APIs',
+            collapsable: false,
+            children: [
+              ['/api/als-oracle-api-specification', 'ALS Oracle'],
+              ['/api/central-ledger-api-specification', 'Central Ledger API'],
+              ['/api/central-settlements-api-specification', 'Central Settlement API'],
+            ]
+          }
         ]
       },
       // TODO: I don't think these belong here - isn't this what community.mojaloop.io is for?
-      // {
-      //   title: 'Discussions & Meeting Notes',
-      //   collapsable: true, // optional, defaults to true
-      //   sidebarDepth: 0,    // optional, defaults to 1
-      //   children: [
-      //     ['/discussions/', 'Discussions'],
-      //     ['/code_quality_security/', 'Code Quality + Security'],
-      //     ['/meeting-notes/', 'Meeting Notes']
-      //   ],
-      //   // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
-      // },
+      {
+        title: 'Discussions & Meeting Notes',
+        collapsable: true, // optional, defaults to true
+        sidebarDepth: 0,    // optional, defaults to 1
+        children: [
+          ['/discussions/', 'Discussions'],
+          ['/code_quality_security/', 'Code Quality + Security'],
+          ['/meeting-notes/', 'Meeting Notes']
+        ],
+        // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
+      },
       ['/contributors-guide/frequently-asked-questions', 'FAQs'],
     ]
   },
