@@ -47,20 +47,52 @@ module.exports = {
     // so we can compare the tools effectively
     sidebar: [
       ['/home', 'Home'],
+      ['/getting_started', 'Getting Started'],
+      ['/mojaloop-background', 'Background'],
       {
-        title: 'Getting Started',
-        collapsable: false, // optional, defaults to true
+        title: 'Deployment Guide',
+        path: '/deployment-guide/',
         sidebarDepth: 0,    // optional, defaults to 1
         children: [
-          // ['/overview', 'PISP Overview'],
-          // ['/background', 'Background'],
-          // ['/use_cases', 'Use Cases']
+          ['/deployment-guide/local-setup-linux', 'Local Setup Linux'],
+          ['/deployment-guide/local-setup-mac', 'Local Setup MacOS'],
+          ['/deployment-guide/local-setup-windows', 'Local Setup Windows'],
+          ['/deployment-guide/helm-legacy-deployment', 'Legacy Helm Deployment'],
+          ['/deployment-guide/helm-legacy-migration', 'Legacy Helm Migration'],
+          ['/deployment-guide/deployment-troubleshooting', 'Deployment Troubleshooting'],
+          ['/deployment-guide/releases', 'Releases'],
         ],
-        // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
       },
-      ['/home', 'Background'],
-      ['/home', 'Deployment Guide'],
-      ['/home', 'Contributor Guide'],
+      {
+        title: 'Contributor\'s Guide',
+        path: '/contributors-guide/',
+        sidebarDepth: 0,
+        children: [
+          '/contributors-guide/new-contributor-checklist',
+          '/contributors-guide/code-of-conduct',
+          '/contributors-guide/signing-the-cla',
+          {
+            title: 'Standards',
+            path: '/contributors-guide/standards/',
+            sidebarDepth: 0,
+            children: [
+              '/contributors-guide/standards/creating-new-features',
+              '/contributors-guide/standards/triaging-ml-oss-bugs',
+              '/contributors-guide/standards/versioning',
+            ]
+          },
+          {
+            title: 'Documentation',
+            path: '/contributors-guide/documentation/',
+            sidebarDepth: 0,
+            children: [
+              '/contributors-guide/documentation/api-documentation',
+              '/contributors-guide/documentation/documentation-style-guide',
+            ]
+          },
+          '/contributors-guide/tools-and-technologies/',
+        ]
+      },
       ['/glossary', 'Concepts'],
       ['/mojaloop-technical-overview/', 'Technology'],
       ['/api/', 'API Reference'],
