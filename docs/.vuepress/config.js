@@ -11,36 +11,54 @@ module.exports = {
     editLinks: true,
     editLinkText: "Edit this page on GitHub",
     // TODO: make nice nav bar
-    // nav: [
-    //   { text: 'Getting Started', link: '/overview/' },
-    //   {
-    //     text: 'Sequences',
-    //     ariaLabel: 'Sequence Diagrams',
-    //     items: [
-    //       { text: 'Account Linking', link: '/linking/' },
-    //       { text: 'Transfer', link: '/transfer/' }
-    //     ]
-    //   },
-    //   {
-    //     text: 'API Reference',
-    //     link: '/guide/',
-    //     items: [
-    //       {
-    //         text: 'Thirdparty-PISP API',
-    //         items: [
-    //           { text: 'PISP', link: '/api/thirdparty-pisp.html' },
-    //         ],
-    //       },
-    //       {
-    //         text: 'Thirdparty-DFSP API',
-    //         items: [
-    //           { text: 'DFSP', link: '/api/thirdparty-dfsp.html' }
-    //         ],
-    //       },
-    //     ]
-    //   },
-    //   { text: 'Mojaloop Docs', link: 'https://docs.mojaloop.io/documentation' }
-    // ],
+    nav: [
+      { text: 'Getting Started', link: '/getting_started/' },
+      {
+        text: 'Guides',
+        ariaLabel: 'Guides',
+        items: [
+          {
+            text: 'General',
+            items: [
+              { text: 'Up and Running With Mojaloop', link: '/getting_started/' },
+              { text: 'Contributing to Mojaloop', link: '/getting_started/' },
+              { text: 'Deploying with Kubernetes', link: '/getting_started/' },
+            ]
+          },
+          {
+            text: 'Developers',
+            items: [
+              { text: 'Integrating my DFSP with a Deployment', link: '/getting_started/' },
+              { text: 'PISP development guide', link: '/getting_started/' },
+            ]
+          }
+        ]
+      },
+      {
+        text: 'API Reference',
+        link: '/guide/',
+        items: [
+          {
+            text: 'Mojaloop APIs',
+            items: [
+              { text: 'FSPIOP API v1.1', link: '/api/thirdparty-pisp.html' },
+              { text: 'FSPIOP API v1.0', link: '/api/thirdparty-pisp.html' },
+              { text: 'Thirdparty-PISP v0.1', link: '/api/thirdparty-pisp.html' },
+              { text: 'Thirdparty-DFSP v0.1', link: '/api/thirdparty-pisp.html' },
+            ],
+          },
+          {
+            text: 'Internal APIs',
+            items: [
+              { link: '/api/als-oracle-api-specification', text: 'ALS Oracle'},
+              { link: '/api/central-ledger-api-specification', text: 'Central Ledger API'},
+              { link: '/api/central-settlements-api-specification', text: 'Central Settlement API'},
+            ],
+          },
+        ]
+      },
+      { text: 'Releases', link: 'https://github.com/mojaloop/helm/releases' },
+    ],
     displayAllHeaders: true,
     // Note:
     // This could very well be improved, I just want to get started
@@ -94,8 +112,29 @@ module.exports = {
         ]
       },
       ['/glossary', 'Concepts'],
-      ['/mojaloop-technical-overview/', 'Technology'],
-      ['/api/', 'API Reference'],
+      {
+        title: 'Technology Overview',
+        path: '/mojaloop-technical-overview/',
+        sidebarDepth: 0,    // optional, defaults to 1
+        children: [
+          // TODO: this section is full of nested pages and sequence diagrams - how do we auto generate them?
+          ['/mojaloop-technical-overview/central-ledger/', 'central-ledger'],
+        ],
+      },
+      {
+        title: 'API Reference',
+        path: '/api/',
+        children: [
+          ['/api/mojaloop-api-specification', 'Mojaloop API Specification'],
+          ['/api/als-oracle-api-specification', 'ALS Oracle'],
+          ['/api/central-ledger-api-specification', 'Central Ledger API'],
+          ['/api/central-settlements-api-specification', 'Central Settlement API'],
+          // TODO: other docs
+
+          ['https://docs.mojaloop.io/mojaloop-specification/', 'Spec Documentation'],
+          ['https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html', 'FSPIOP API Definition']
+        ]
+      },
       // TODO: I don't think these belong here - isn't this what community.mojaloop.io is for?
       // {
       //   title: 'Discussions & Meeting Notes',
@@ -109,40 +148,6 @@ module.exports = {
       //   // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
       // },
       ['/contributors-guide/frequently-asked-questions', 'FAQs'],
-
-
-
-      // {
-      //   title: 'Guides',
-      //   children: [
-      //     ['/guides/pisp_integration.html', 'PISP Integration Guide'],
-      //     ['/guides/reference_pisp_app.html', 'PISP Reference App'],
-      //     ['/guides/dfsp_integration.html', 'DFSP Integration Guide'],
-      //   ]
-      // },
-      // {
-      //   title: 'Sequence Diagrams',
-      //   children: [
-      //     ['/linking/', 'Account Linking Process'],
-      //     ['/transfer/', 'Transfer Process']
-      //   ]
-      // },
-      // {
-      //   title: 'Design',
-      //   children: [
-      //     ['/design-decisions/', 'Design Decisions'],
-      //     ['/roles_and_endpoints', 'Roles and Endpoints'],
-      //     ['/identifiers', 'Identifiers'],
-      //     ['/error_codes', 'Error Codes'],
-      //   ]
-      // },
-      // {
-      //   title: 'API Reference',
-      //   children: [
-      //     ['/api/thirdparty-pisp.html', 'Thirdparty-PISP API'],
-      //     ['/api/thirdparty-dfsp.html', 'Thirdparty-DFSP API'],
-      //   ]
-      // },
     ]
   },
   plugins: [
@@ -158,7 +163,7 @@ module.exports = {
     // https://github.com/ulivz/vuepress-plugin-export
     'vuepress-plugin-export'
   ],
-  // I think we need this for swagger renderer...
+  // Configure webpack for custom rendering (e.g. OpenAPI/Swagger Plugin)
   configureWebpack: (config, isServer) => {
     if (!isServer) {
       // mutate the config for client
