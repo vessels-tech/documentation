@@ -1,7 +1,3 @@
----
-showToc: false
----
-
 # Frequently Asked Questions
 
 This document contains some of the most frequently asked questions from the community.
@@ -147,10 +143,10 @@ Here are some resources to start with:
 
 #### 20. How to register a new party in Mojaloop?
 
-There is no  POST on /parties resource, as specified in section 6.1.1 of the API Defintion. Please refer to section: 6.2.2.3 POST /participants/<Type>/<ID> in the API Defintion.
+<!-- There is no  POST on /parties resource, as specified in section 6.1.1 of the API Defintion. Please refer to section: 6.2.2.3 POST /participants/<Type>/<ID> in the API Defintion. -->
 
-” _The HTTP request POST /participants/<Type>/<ID> (or POST /participants/<Type>/<ID>/<SubId>) is used to create information on the server regarding the provided identity, defined by <Type>, <ID>, and optionally <SubId> (for example, POST_
-  _/participants/MSISDN/123456789 or POST /participants/BUSINESS/shoecompany/employee1). See Section 5.1.6.11 for more information regarding addressing of a Party._ ”.
+<!-- ” _The HTTP request POST /participants/<Type>/<ID> (or POST /participants/<Type>/<ID>/<SubId>) is used to create information on the server regarding the provided identity, defined by <Type>, <ID>, and optionally <SubId> (for example, POST_
+  _/participants/MSISDN/123456789 or POST /participants/BUSINESS/shoecompany/employee1). See Section 5.1.6.11 for more information regarding addressing of a Party._ ”. -->
   
 #### 21. Does the participant represent an account of a customer in a bank?
 
@@ -224,12 +220,12 @@ This also ensures all the services always run the code they’re meant to run an
 There is an architecture diagram that presents a good view of the integration between the different entities. https://github.com/mojaloop/docs/blob/master/Diagrams/ArchitectureDiagrams/Arch-Flows.svg.
 
 #### 33. Is there any open source ISO8583-OpenAPI converter/connector available?
-
-I don't believe a generic ISO8583 <-> Mojaloop integration is available currently. We're working on some "traditional payment channel" to Mojaloop integrations (POS and ATM) which we hope to demo at the next convening. These would form the basis for an ISO8583 integration we might build and add to the OSS stack but bare in mind that these integrations will be very use case specific.
+<!-- 
+I don't believe a generic ISO8583 <-> Mojaloop integration is available currently. We're working on some "traditional payment channel" to Mojaloop integrations (POS and ATM) which we hope to demo at the next convening. These would form the basis for an ISO8583 integration we might build and add to the OSS stack but bare in mind that these integrations will be very use case specific. -->
 
 #### 34. How do I know the end points to setup postman for testing the deployment?
 
-On the Kubernetes dashboard, select the correct NAMESPACE. Go to Ingeresses. Depending on how you deployed the helm charts, look for 'moja-centralledger-service'. Click on edit, and find the tag <HOST>. This would contain the endpoint for this service.
+<!-- On the Kubernetes dashboard, select the correct NAMESPACE. Go to Ingeresses. Depending on how you deployed the helm charts, look for 'moja-centralledger-service'. Click on edit, and find the tag <HOST>. This would contain the endpoint for this service. -->
 
 #### 35. Why are there no reversals allowed on a Mojaloop?
 

@@ -42,50 +42,76 @@ module.exports = {
     //   { text: 'Mojaloop Docs', link: 'https://docs.mojaloop.io/documentation' }
     // ],
     displayAllHeaders: true,
-    // sidebar: [
-    //   {
-    //     title: 'Getting Started',
-    //     collapsable: false, // optional, defaults to true
-    //     sidebarDepth: 0,    // optional, defaults to 1
-    //     children: [
-    //       ['/overview', 'PISP Overview'],
-    //       ['/background', 'Background'],
-    //       ['/use_cases', 'Use Cases']
-    //     ],
-    //     // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
-    //   },
-    //   {
-    //     title: 'Guides',
-    //     children: [
-    //       ['/guides/pisp_integration.html', 'PISP Integration Guide'],
-    //       ['/guides/reference_pisp_app.html', 'PISP Reference App'],
-    //       ['/guides/dfsp_integration.html', 'DFSP Integration Guide'],
-    //     ]
-    //   },
-    //   {
-    //     title: 'Sequence Diagrams',
-    //     children: [
-    //       ['/linking/', 'Account Linking Process'],
-    //       ['/transfer/', 'Transfer Process']
-    //     ]
-    //   },
-    //   {
-    //     title: 'Design',
-    //     children: [
-    //       ['/design-decisions/', 'Design Decisions'],
-    //       ['/roles_and_endpoints', 'Roles and Endpoints'],
-    //       ['/identifiers', 'Identifiers'],
-    //       ['/error_codes', 'Error Codes'],
-    //     ]
-    //   },
-    //   {
-    //     title: 'API Reference',
-    //     children: [
-    //       ['/api/thirdparty-pisp.html', 'Thirdparty-PISP API'],
-    //       ['/api/thirdparty-dfsp.html', 'Thirdparty-DFSP API'],
-    //     ]
-    //   },
-    // ]
+    // Note:
+    // This could very well be improved, I just want to get started
+    // so we can compare the tools effectively
+    sidebar: [
+      ['/home', 'Home'],
+      {
+        title: 'Getting Started',
+        collapsable: false, // optional, defaults to true
+        sidebarDepth: 0,    // optional, defaults to 1
+        children: [
+          // ['/overview', 'PISP Overview'],
+          // ['/background', 'Background'],
+          // ['/use_cases', 'Use Cases']
+        ],
+        // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
+      },
+      ['/home', 'Background'],
+      ['/home', 'Deployment Guide'],
+      ['/home', 'Contributor Guide'],
+      ['/glossary', 'Concepts'],
+      ['/mojaloop-technical-overview/', 'Technology'],
+      ['/api/', 'API Reference'],
+      // TODO: I don't think these belong here - isn't this what community.mojaloop.io is for?
+      // {
+      //   title: 'Discussions & Meeting Notes',
+      //   collapsable: true, // optional, defaults to true
+      //   sidebarDepth: 0,    // optional, defaults to 1
+      //   children: [
+      //     ['/discussions/', 'Discussions'],
+      //     ['/code_quality_security/', 'Code Quality + Security'],
+      //     ['/meeting-notes/', 'Meeting Notes']
+      //   ],
+      //   // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
+      // },
+      ['/contributors-guide/frequently-asked-questions', 'FAQs'],
+
+
+
+      // {
+      //   title: 'Guides',
+      //   children: [
+      //     ['/guides/pisp_integration.html', 'PISP Integration Guide'],
+      //     ['/guides/reference_pisp_app.html', 'PISP Reference App'],
+      //     ['/guides/dfsp_integration.html', 'DFSP Integration Guide'],
+      //   ]
+      // },
+      // {
+      //   title: 'Sequence Diagrams',
+      //   children: [
+      //     ['/linking/', 'Account Linking Process'],
+      //     ['/transfer/', 'Transfer Process']
+      //   ]
+      // },
+      // {
+      //   title: 'Design',
+      //   children: [
+      //     ['/design-decisions/', 'Design Decisions'],
+      //     ['/roles_and_endpoints', 'Roles and Endpoints'],
+      //     ['/identifiers', 'Identifiers'],
+      //     ['/error_codes', 'Error Codes'],
+      //   ]
+      // },
+      // {
+      //   title: 'API Reference',
+      //   children: [
+      //     ['/api/thirdparty-pisp.html', 'Thirdparty-PISP API'],
+      //     ['/api/thirdparty-dfsp.html', 'Thirdparty-DFSP API'],
+      //   ]
+      // },
+    ]
   },
   plugins: [
     // Checks for broken links
