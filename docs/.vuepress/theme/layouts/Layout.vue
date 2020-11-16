@@ -27,28 +27,32 @@
       </template>
     </Sidebar>
 
-    <Home v-if="$page.frontmatter.home" />
-
-    <Page
-      v-else
-      :sidebar-items="sidebarItems"
-    >
-      <template #top>
-        <slot name="page-top" />
-      </template>
-      <template #bottom>
-        <slot name="page-bottom" />
-      </template>
-    </Page>
+    <div id="main" class="main-container">
+      <Home v-if="$page.frontmatter.home" />
+      <Page
+        v-else
+        :sidebar-items="sidebarItems"
+      >
+        <template #top>
+          <slot name="page-top" />
+        </template>
+        <template #bottom>
+          <slot name="page-bottom" />
+        </template>
+      </Page>
+    </div>
+    <RightBar :heading-items="headingItems" />
   </div>
 </template>
 
 <script>
-import Home from '@@parent-theme/components/Home.vue'
-import Navbar from '@@parent-theme/components/Navbar.vue'
-import Page from '@@parent-theme/components/Page.vue'
-import Sidebar from '@@parent-theme/components/Sidebar.vue'
-import { resolveSidebarItems } from '../util'
+import Home from '@parent-theme/components/Home.vue'
+import Navbar from '@parent-theme/components/Navbar.vue'
+import Page from '@parent-theme/components/Page.vue'
+import Sidebar from '@parent-theme/components/Sidebar.vue'
+import RightBar from "../components/RightBar";
+
+import { resolveSidebarItems, resolveHeaders } from '../util'
 
 export default {
   name: 'Layout',
@@ -57,7 +61,8 @@ export default {
     Home,
     Page,
     Sidebar,
-    Navbar
+    Navbar,
+    RightBar,
   },
 
   data () {
@@ -67,6 +72,16 @@ export default {
   },
 
   computed: {
+    headingItems() {
+      // return resolveHeaders(this.$page);
+      return resolveSidebarItems(
+        this.$page,
+        this.$page.regularPath,
+        this.$site,
+        this.$localePath
+      )
+    },
+
     shouldShowNavbar () {
       const { themeConfig } = this.$site
       const { frontmatter } = this.$page
