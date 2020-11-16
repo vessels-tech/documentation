@@ -2,29 +2,30 @@
   <main class="page">
     <slot name="top" />
 
-    <Content id="content" class="theme-default-content" />
+    <Content class="theme-default-content" />
+    <PageEdit />
 
     <PageNav v-bind="{ sidebarItems }" />
-
-    <PageFooter v-on="$listeners" :is-dark="isDark" />
 
     <slot name="bottom" />
   </main>
 </template>
 
-<style lang="postcss">
-.page {
-  @apply mx-auto pb-8 block relative;
-}
-</style>
-
 <script>
-import PageNav from "./PageNav";
-import PageFooter from "./PageFooter";
+import PageEdit from '@theme/components/PageEdit.vue'
+import PageNav from '@theme/components/PageNav.vue'
 
 export default {
-  name: "Page",
-  components: { PageNav, PageFooter },
-  props: ["sidebarItems", "isDark"]
-};
+  components: { PageEdit, PageNav },
+  props: ['sidebarItems']
+}
 </script>
+
+<style lang="stylus">
+@require '../styles/wrapper.styl'
+
+.page
+  padding-bottom 2rem
+  display block
+
+</style>
