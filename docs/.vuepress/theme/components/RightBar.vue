@@ -1,3 +1,7 @@
+<!-- 
+  Ref: https://github.com/craftcms/docs/blob/main/docs/.vuepress/theme/components/RightBar.vue
+ -->
+
 <template>
   <div class="right-bar">
     <div class="switch-wrapper hidden xl:block">
