@@ -2,6 +2,8 @@
 
 Local setup on a Laptop or Desktop to run the Mojaloop project.
 
+<TOC />
+
 ## Setup Introduction
 
 This document will provide guidelines to a technical capable resources to setup, deploy and configure the Mojaloop applications on a local environment, utilizing Docker, Kubernetes and HELM charts.

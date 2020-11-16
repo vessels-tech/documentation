@@ -22,3 +22,4 @@ _book
 *.log
 
 *.jar
+docs/.vuepress/dist/**

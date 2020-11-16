@@ -16,13 +16,20 @@
     mounted: function () {
       this.$nextTick(function () {
         const domNode = document.getElementById('api-doc-wrapper');
-        const spec = require('@source/' + domNode.dataset.src);
+        let spec, url
+        // If user puts in a full url, just load that with SwaggerUI instead of 'requiring' it.
+        if (domNode.dataset.src.indexOf('http') < 0) {
+          const spec = require('@source/' + domNode.dataset.src);
+        } else {
+          url = domNode.dataset.src
+        }
         const urlParts = window.location.href.split('/')
         urlParts.pop()
 
         // config: https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md
         const ui = SwaggerUI({
           spec,
+          url,
           domNode,
           oauth2RedirectUrl: '/oauth2-redirect.html',
           withCredentials: true,

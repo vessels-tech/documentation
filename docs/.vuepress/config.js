@@ -1,8 +1,22 @@
 module.exports = {
   description: 'Just playing around',
-  //full url is "docs.mojaloop.io/pisp"
-  // base: '/',
-  // theme: 'api',
+  base: '/documentation/',
+  theme: 'theme-default',
+  // themeConfig: {
+  //   // ...
+  //   codeLanguages: {
+  //     php: "PHP",
+  //     twig: "Twig",
+  //     // any other code language labels you want to include in code toggles...
+  //   },
+  // },
+  // markdown: {
+  //   anchor: { level: [2, 3] },
+  //   extendMarkdown(md) {
+  //     let markup = require("vuepress-theme-craftdocs/markup");
+  //     md.use(markup);
+  //   },
+  // },
   themeConfig: {
     home: true,
     // this file is copied out of `/public` for us
@@ -41,10 +55,9 @@ module.exports = {
           {
             text: 'Mojaloop APIs',
             items: [
-              { text: 'FSPIOP API v1.1', link: '/api/thirdparty-pisp.html' },
-              { text: 'FSPIOP API v1.0', link: '/api/thirdparty-pisp.html' },
+              { text: 'FSPIOP API v1.0', link: '/api/mojaloop-api-specification' },
               { text: 'Thirdparty-PISP v0.1', link: '/api/thirdparty-pisp.html' },
-              { text: 'Thirdparty-DFSP v0.1', link: '/api/thirdparty-pisp.html' },
+              { text: 'Thirdparty-DFSP v0.1', link: '/api/thirdparty-dfsp.html' },
             ],
           },
           {
@@ -134,7 +147,10 @@ module.exports = {
             title: 'Mojaloop APIs',
             collapsable: false,
             children: [
-              ['/api/mojaloop-api-specification', 'Mojaloop API Specification'],
+              ['/api/mojaloop-api-specification', 'FSPIOP v1.0'],
+              // Just as examples, we probably don't want thirdparty-api stuff here just yet
+              [ '/api/thirdparty-pisp', 'Thirdparty-PISP v0.1'],
+              [ '/api/thirdparty-dfsp', 'Thirdparty-DFSP v0.1'],
               ['https://docs.mojaloop.io/mojaloop-specification/', 'Spec Documentation'],
               ['https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html', 'FSPIOP API Definition']
             ]
@@ -176,7 +192,13 @@ module.exports = {
 
     // Beta - export site as PDF
     // https://github.com/ulivz/vuepress-plugin-export
-    'vuepress-plugin-export'
+    'vuepress-plugin-export',
+
+    // Floating TOC
+    // https://github.com/xuekai-china/vuepress-plugin-right-anchor
+    // TODO: format nicer?
+    // 'vuepress-plugin-right-anchor'
+
   ],
   // Configure webpack for custom rendering (e.g. OpenAPI/Swagger Plugin)
   configureWebpack: (config, isServer) => {
