@@ -9,14 +9,7 @@
 
       <div id="mid" class="relative">
         <div class="nav-wrap relative w-64 overflow-x-hidden h-full">
-          <transition name="slide-left">
-            <div class="set-index" v-if="!this.$activeSet">
-              <DocSetPanel @selectVersion="handleVersionSelect" />
-            </div>
-          </transition>
-          <transition name="slide-right">
             <div class="set-nav" v-if="this.$activeSet">
-              <DocSetPanel @selectVersion="handleVersionSelect" />
               <transition :name="getTransitionClass(1)">
                 <SidebarLinks
                   v-if="currentSidebarDepth === 1"
@@ -38,7 +31,6 @@
                 />
               </transition>
             </div>
-          </transition>
         </div>
       </div>
 

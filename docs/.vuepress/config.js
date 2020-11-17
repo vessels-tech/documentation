@@ -1,7 +1,7 @@
 module.exports = {
   description: 'Just playing around',
   base: '/documentation/',
-  theme: 'theme-default',
+  // theme: 'theme-default',
   // themeConfig: {
   //   // ...
   //   codeLanguages: {
