@@ -21,7 +21,14 @@
       class="sidebar-mask"
       @click="toggleSidebar(false)"
     />
-
+<!-- 
+    <LeftBar
+      :items="sidebarItems"
+      :extra-items="extraSidebarItems"
+      @toggle-sidebar="toggleSidebar"
+      @select-version="handleVersionUpdate"
+      @select-language="handleLanguageUpdate"
+    /> -->
     <Sidebar
       :items="sidebarItems"
       @toggle-sidebar="toggleSidebar"
@@ -137,10 +144,12 @@
 </style>
 
 <script>
+import "../styles/index.pcss";
 import Home from '@parent-theme/components/Home.vue'
 import Navbar from '@parent-theme/components/Navbar.vue'
 import Page from '@parent-theme/components/Page.vue'
-import Sidebar from '@parent-theme/components/Sidebar.vue'
+import Sidebar from '../components/Sidebar.vue'
+import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
 
 import { resolveSidebarItems, resolveHeaders } from '../util'
@@ -151,6 +160,7 @@ export default {
   components: {
     Home,
     Page,
+    LeftBar,
     Sidebar,
     Navbar,
     RightBar,

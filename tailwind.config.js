@@ -5,9 +5,9 @@ module.exports = {
   },
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["GT Eesti", "Futura Std", "Futura", "Helvetica", "sans-serif"]
-      },
+      // fontFamily: {
+        // sans: ["GT Eesti", "Futura Std", "Futura", "Helvetica", "sans-serif"]
+      // },
       colors: {
         slate: "#2d3748",
         soft: "#f1f5fd",
