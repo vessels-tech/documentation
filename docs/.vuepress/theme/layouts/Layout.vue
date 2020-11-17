@@ -1,3 +1,10 @@
+<!-- 
+
+  Layout Template ejected from vanilla vuepress 
+  Right sidebar heavily influenced by: https://github.com/craftcms/docs
+
+-->
+
 <template>
   <div
     class="theme-container"
@@ -45,6 +52,90 @@
   </div>
 </template>
 
+
+<style lang="postcss">
+/* style taken from craftcms */
+#nprogress-container {
+  @apply block absolute top-0 left-0 right-0 overflow-hidden w-full;
+  height: 2px;
+  z-index: 1050;
+}
+
+.theme-container {
+  @apply relative w-full;
+}
+
+.sidebar-transitioning {
+  .main-container {
+    transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-transitioning .main-container {
+    transition: none;
+  }
+}
+
+/* Seems to be changing the width... */
+.main-container {
+  @apply mx-auto relative max-w-screen-md;
+}
+
+.top-bar {
+  @apply block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md;
+}
+
+.sidebar-mask {
+  @apply fixed top-0 left-0 hidden h-screen w-screen;
+  z-index: 9;
+}
+
+.sidebar {
+  @apply bg-white text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
+  top: 3.6rem;
+}
+
+.sidebar-open {
+  .main-container {
+    /* w-64 */
+    transform: translateX(16rem);
+    opacity: 0.5;
+    overflow: hidden;
+  }
+
+  .left-bar {
+    transform: translateX(0);
+  }
+
+  .sidebar-mask {
+    @apply block;
+  }
+}
+
+.theme-default-content:not(.custom),
+.content-wrapper {
+  @apply py-8 px-10 max-w-screen-md;
+}
+
+@screen lg {
+  .main-container {
+    @apply relative;
+    left: 8rem;
+  }
+
+  .left-bar {
+    transform: translateX(0);
+  }
+}
+
+@screen xl {
+  .main-container {
+    left: 0;
+  }
+}
+</style>
+
 <script>
 import Home from '@parent-theme/components/Home.vue'
 import Navbar from '@parent-theme/components/Navbar.vue'
@@ -73,13 +164,7 @@ export default {
 
   computed: {
     headingItems() {
-      // return resolveHeaders(this.$page);
-      return resolveSidebarItems(
-        this.$page,
-        this.$page.regularPath,
-        this.$site,
-        this.$localePath
-      )
+      return resolveHeaders(this.$page);
     },
 
     shouldShowNavbar () {

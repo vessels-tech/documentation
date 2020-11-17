@@ -4,9 +4,6 @@
 
 <template>
   <div class="right-bar">
-    <div class="switch-wrapper hidden xl:block">
-      <ColorModeSwitch v-on="$listeners" :on="isDark" />
-    </div>
     <div class="sidebar-link-wrapper">
       <SidebarLinks
         :depth="depth"

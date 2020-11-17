@@ -211,5 +211,8 @@ module.exports = {
         loader: "js-yaml-loader"
       });
     }
+  },
+  postcss: {
+    plugins: require("../../postcss.config.js").plugins
   }
 }

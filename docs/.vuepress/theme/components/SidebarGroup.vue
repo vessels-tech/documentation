@@ -1,12 +1,12 @@
 <template>
   <section
-    class="sidebar-group"
+    class="sidebar-group mt-4"
     :class="[
       {
         collapsable,
-        'is-sub-group': depth !== 0
+        'is-sub-group': depth !== 0,
       },
-      `depth-${depth}`
+      `depth-${depth}`,
     ]"
   >
     <RouterLink
@@ -14,17 +14,13 @@
       class="sidebar-heading clickable"
       :class="{
         open,
-        'active': isActive($route, item.path)
+        active: isActive($route, item.path),
       }"
       :to="item.path"
       @click.native="$emit('toggle')"
     >
       <span>{{ item.title }}</span>
-      <span
-        v-if="collapsable"
-        class="arrow"
-        :class="open ? 'down' : 'right'"
-      />
+      <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
     </RouterLink>
 
     <p
@@ -33,12 +29,8 @@
       :class="{ open }"
       @click="$emit('toggle')"
     >
-      <span>{{ item.title }}</span>
-      <span
-        v-if="collapsable"
-        class="arrow"
-        :class="open ? 'down' : 'right'"
-      />
+      <span>{{ fixedHeading || item.title }}</span>
+      <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
     </p>
 
     <DropdownTransition>
@@ -46,8 +38,7 @@
         v-if="open || !collapsable"
         class="sidebar-group-items"
         :items="item.children"
-        :sidebar-depth="item.sidebarDepth"
-        :initial-open-group-index="item.initialOpenGroupIndex"
+        :sidebar-depth="item.sidebarDepth || sidebarDepth"
         :depth="depth + 1"
       />
     </DropdownTransition>
@@ -55,87 +46,99 @@
 </template>
 
 <script>
-import { isActive } from '../util'
-import DropdownTransition from '@theme/components/DropdownTransition.vue'
+import { isActive } from "../util";
+import DropdownTransition from "./DropdownTransition.vue";
 
 export default {
-  name: 'SidebarGroup',
+  name: "SidebarGroup",
 
   components: {
-    DropdownTransition
+    DropdownTransition,
   },
 
   props: [
-    'item',
-    'open',
-    'collapsable',
-    'depth'
+    "item",
+    "open",
+    "collapsable",
+    "depth",
+    "sidebarDepth",
+    "fixedHeading",
   ],
 
   // ref: https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
-  beforeCreate () {
-    this.$options.components.SidebarLinks = require('@theme/components/SidebarLinks.vue').default
+  beforeCreate() {
+    this.$options.components.SidebarLinks = require("./SidebarLinks.vue").default;
   },
 
-  methods: { isActive }
-}
+  methods: { isActive },
+};
 </script>
 
-<style lang="stylus">
-.sidebar-group
-  .sidebar-group
-    padding-left 0.5em
-  &:not(.collapsable)
-    .sidebar-heading:not(.clickable)
-      cursor auto
-      color inherit
-  // refine styles of nested sidebar groups
-  &.is-sub-group
-    padding-left 0
-    & > .sidebar-heading
-      font-size 0.95em
-      line-height 1.4
-      font-weight normal
-      padding-left 2rem
-      &:not(.clickable)
-        opacity 0.5
-    & > .sidebar-group-items
-      padding-left 1rem
-      & > li > .sidebar-link
+<style lang="postcss">
+.sidebar-group {
+  &.group-0 {
+    @apply mt-0;
+  }
+
+  &:not(.collapsable) {
+    .sidebar-heading:not(.clickable) {
+      @apply cursor-auto;
+      color: inherit;
+    }
+  }
+
+  &.is-sub-group {
+    padding-left: 0;
+
+    & > .sidebar-heading {
+      @apply font-normal pl-8;
+      font-size: 0.95em;
+      line-height: 1.4;
+
+      &:not(.clickable) {
+        @apply opacity-50;
+      }
+    }
+
+    & > .sidebar-group-items {
+      @apply pl-4;
+
+      & > li > .sidebar-link {
         font-size: 0.95em;
-        border-left none
-  &.depth-2
-    & > .sidebar-heading
-      border-left none
+      }
+    }
+  }
+}
 
-.sidebar-heading
-  color $textColor
-  transition color .15s ease
-  cursor pointer
-  font-size 1.1em
-  font-weight bold
-  // text-transform uppercase
-  padding 0.35rem 1.5rem 0.35rem 1.25rem
-  width 100%
-  box-sizing border-box
-  margin 0
-  border-left 0.25rem solid transparent
-  &.open, &:hover
-    color inherit
-  .arrow
-    position relative
-    top -0.12em
-    left 0.5em
-  &.clickable
-    &.active
-      font-weight 600
-      color $accentColor
-      border-left-color $accentColor
-    &:hover
-      color $accentColor
+.sidebar-heading {
+  @apply px-4 cursor-pointer font-bold m-0 box-border w-full;
+  transition: color 0.15s ease;
 
-.sidebar-group-items
-  transition height .1s ease-out
-  font-size 0.95em
-  overflow hidden
+  &.open,
+  &:hover {
+    color: inherit;
+  }
+
+  .arrow {
+    @apply relative;
+    top: -0.12em;
+    left: 0.5em;
+  }
+
+  &.clickable {
+    &.active {
+      @apply font-semibold text-blue;
+    }
+
+    &:hover {
+      @apply text-blue;
+    }
+  }
+}
+
+.sidebar-group-items {
+  @apply overflow-hidden;
+  transition: height 0.1s ease-out;
+  font-size: 0.95em;
+}
 </style>
