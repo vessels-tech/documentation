@@ -168,7 +168,7 @@ module.exports = {
       },
       // TODO: I don't think these belong here - isn't this what community.mojaloop.io is for?
       {
-        title: 'Discussions & Meeting Notes',
+        title: 'Discussions & Notes',
         collapsable: true, // optional, defaults to true
         sidebarDepth: 0,    // optional, defaults to 1
         children: [

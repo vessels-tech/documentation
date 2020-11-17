@@ -112,7 +112,12 @@ export default {
 
 .sidebar-heading {
   @apply px-4 cursor-pointer font-bold m-0 box-border w-full;
+  /* TODO: make nice fade again? */
+  color: var(--heading-color);
   transition: color 0.15s ease;
+  font-size: 1.1em;
+  line-height: 1.7;
+  font-weight: bold;
 
   &.open,
   &:hover {

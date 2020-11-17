@@ -120,11 +120,21 @@ function renderExternal(h, to, text) {
   font-size: 0.95em;
 }
 
+li {
+  margin-top: .75rem;
+}
+
 a.sidebar-link {
-  @apply px-2 py-1 font-normal inline-block w-full box-border;
+  @apply px-4;
+  /* @apply px-2 py-1 font-normal inline-block w-full box-border; */
   color: var(--sidebar-link-color);
-  line-height: 1.4;
+  /* line-height: 1.4; */
   transition: all 0.25s ease-out;
+  color: var(--heading-color);
+  transition: color 0.15s ease;
+  font-size: 1.1em;
+  line-height: 1.7;
+  font-weight: bold;
 
   .sidebar-group & {
     @apply pl-4;
@@ -132,10 +142,10 @@ a.sidebar-link {
 
   .sidebar-sub-headers & {
     @apply py-1;
-    border-left: none;
+    /* border-left: none; */
 
     &.active {
-      @apply font-medium;
+      /* @apply font-medium; */
     }
   }
 
