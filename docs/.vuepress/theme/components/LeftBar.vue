@@ -92,6 +92,11 @@
     @apply absolute w-full border-t;
     border-color: var(--border-color);
   }
+
+/* TODO: change this on width for mobile nav */
+  .nav-links {
+    display: none
+  }
 }
 
 @screen lg {
