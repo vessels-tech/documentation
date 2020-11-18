@@ -7,23 +7,37 @@ function childrenForChildren(rootPath, grandChild) {
     return null;
   }
 
-  console.log("getting grandchildren", grandChild)
+  // console.log("getting grandchildren", grandChild)
   let children
   if (grandChild.children) {
-    // children = grandChild.children
-    //   .filter(thing => thing.name !== 'README.md')
-    //   .filter(thing => thing.name !== 'assets')
-    //   .map(greatGrandChild => childrenForChildren(`${rootPath}/${grandChild.name}`, greatGrandChild))
+    const filteredChildren = grandChild.children
+      .filter(thing => thing.name !== 'README.md')
+      .filter(thing => thing.name !== 'assets')
+    if (filteredChildren.length > 0) {
+      children = filteredChildren
+        .map(greatGrandChild => childrenForChildren(`${rootPath}/${grandChild.name}`, greatGrandChild))
+    }
   }
 
   return {
+    // TODO: when to put trailing slash?...
+    // tx-req-service needs it, but sdk-scheme-adapter doesn't
+    // a folder with a readme NEEDS a slash
+    // a single filename needs to NOT have a slash
     path: `${path.join(rootPath, grandChild.name.replace('.md', ''))}`,
-    title: grandChild.name,
+    title: grandChild.name.replace('.md', ''),
     children
   }
-
 }
 
+// TODO: clean this up
+/**
+ * @function childrenForPath
+ * @description Renders a sidebar for children based on a root path
+ *  This is useful for directories which contain many children, 
+ *  which is infeasible to maintain in a separate list
+ * @param {string} rootPath - The root path to start rendering from
+ */
 function childrenForPath (rootPath) {
   // iterare through dirs, build out
   console.log('rendering path ', rootPath)
@@ -35,7 +49,8 @@ function childrenForPath (rootPath) {
     .filter(thing => thing.name !== 'README.md')
     .filter(thing => thing.name !== 'assets')
     // just for now!
-    .filter(thing => thing.name === 'central-event-processor')
+    // .filter(thing => thing.name === 'central-bulk-transfers')
+    .filter(thing => thing.name === 'transaction-requests-service')
 
 
   console.log('children', children)
@@ -129,7 +144,7 @@ module.exports = {
       },
       { text: 'Releases', link: 'https://github.com/mojaloop/helm/releases' },
     ],
-    displayAllHeaders: true,
+    displayAllHeaders: false,
     // Note:
     // This could very well be improved, I just want to get started
     // so we can compare the tools effectively
