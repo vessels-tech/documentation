@@ -1,9 +1,9 @@
 <template>
-  <aside class="left-bar">
-    <div class="wrap">
+  <aside class="sidebar">
+    <!-- <div class="wrap"> -->
 
       <!-- TODO: reenable these for responsive navbar layout -->
-      <NavLinks />
+      <!-- <NavLinks /> -->
 
       <slot name="top" />
 
@@ -12,7 +12,7 @@
         :items="items"
       />
       <slot name="bottom" />
-    </div>
+    <!-- </div> -->
   </aside>
 </template>
 
@@ -54,7 +54,7 @@ export default {
 
 .left-bar {
   /* TODO: change this to navbar height variable */
-  top: 3.6rem;
+  /* top: 3.6rem; */
   @apply w-64 h-screen fixed z-10;
   background-color: var(--sidebar-bg-color);
   transform: translateX(-16rem);
