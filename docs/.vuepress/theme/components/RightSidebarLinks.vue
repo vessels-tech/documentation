@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import SidebarGroup from "./SidebarGroup.vue";
+import SidebarGroup from "./RightSidebarGroup.vue";
 import ToggleSidebarGroup from "./ToggleSidebarGroup.vue";
-import SidebarLink from "./SidebarLink.vue";
+import SidebarLink from "./RightSidebarLink.vue";
 import ExtraSidebarItems from "./ExtraSidebarItems.vue";
 import { isActive } from "../util";
 

@@ -55,7 +55,7 @@
         </template>
       </Page>
     </div>
-    <!-- <RightBar :heading-items="headingItems" /> -->
+    <RightBar :heading-items="headingItems" />
   </div>
 </template>
 
@@ -99,8 +99,9 @@
 }
 
 .sidebar {
-  @apply bg-white text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
+  @apply text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
   top: 3.6rem;
+  background-color: var(--sidebar-bg-color);
 
   /* TODO: do breaks and stuff for different screen sizes*/
   transform: translateX(0);
@@ -152,10 +153,10 @@ import "../styles/index.pcss";
 import Home from '@parent-theme/components/Home.vue'
 import Navbar from '@parent-theme/components/Navbar.vue'
 import Page from '@parent-theme/components/Page.vue'
-// import Sidebar from '../components/Sidebar.vue'
-import Sidebar from '@parent-theme/components/Sidebar.vue'
+import Sidebar from '../components/Sidebar.vue'
+// import Sidebar from '@parent-theme/components/Sidebar.vue'
 // import LeftBar from "../components/LeftBar";
-// import RightBar from "../components/RightBar";
+import RightBar from "../components/RightBar";
 
 import { resolveSidebarItems, resolveHeaders } from '../util'
 
@@ -165,11 +166,9 @@ export default {
   components: {
     Home,
     Page,
-    // LeftBar,
     Sidebar,
     Navbar,
-    // TODO: reinstate once we are happy with sidebar!
-    // RightBar,
+    RightBar,
   },
 
   data () {

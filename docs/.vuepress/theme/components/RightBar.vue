@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import SidebarLinks from "./SidebarLinks";
+import SidebarLinks from "./RightSidebarLinks";
 import ColorModeSwitch from "./ColorModeSwitch";
 
 export default {
