@@ -46,7 +46,6 @@ export default {
 <style lang="postcss">
 .right-bar {
   @apply w-64 absolute right-0 top-0 bottom-0 hidden;
-  background-color: red;
 
   .right-sidebar-heading {
     @apply text-xs mx-0 tracking-wide uppercase;
