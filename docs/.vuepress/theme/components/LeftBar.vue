@@ -94,9 +94,9 @@
   }
 
 /* TODO: change this on width for mobile nav */
-  .nav-links {
+  /* .nav-links {
     display: none
-  }
+  } */
 }
 
 @screen lg {

@@ -2,24 +2,28 @@
   <header class="navbar">
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
-    <RouterLink
-      :to="$localePath"
-      class="home-link"
-    >
-      <img
-        v-if="$site.themeConfig.logo"
-        class="logo"
-        :src="$withBase($site.themeConfig.logo)"
-        :alt="$siteTitle"
-      >
-      <span
-        v-if="$siteTitle"
-        ref="siteName"
-        class="site-name"
-        :class="{ 'can-hide': $site.themeConfig.logo }"
-      >{{ $siteTitle }}</span>
-    </RouterLink>
-
+    <div class="navbar-logo-wrapper">
+      <div class="navbar-left">
+        <RouterLink
+          :to="$localePath"
+          class="home-link"
+        >
+          <img
+            v-if="$site.themeConfig.logo"
+            class="logo"
+            :src="$withBase($site.themeConfig.logo)"
+            :alt="$siteTitle"
+          >
+          <span
+            v-if="$siteTitle"
+            ref="siteName"
+            class="site-name"
+            :class="{ 'can-hide': $site.themeConfig.logo }"
+          >{{ $siteTitle }}</span>
+        </RouterLink>
+      </div>
+    </div>
+      
     <div
       class="links"
       :style="linksWrapMaxWidth ? {
@@ -39,8 +43,8 @@
 <script>
 import AlgoliaSearchBox from '@AlgoliaSearchBox'
 import SearchBox from '@SearchBox'
-import SidebarButton from '@theme/components/SidebarButton.vue'
-import NavLinks from '@theme/components/NavLinks.vue'
+import SidebarButton from '@parent-theme/components/SidebarButton.vue'
+import NavLinks from '@parent-theme/components/NavLinks.vue'
 
 export default {
   name: 'Navbar',
@@ -99,6 +103,19 @@ $navbar-horizontal-padding = 1.5rem
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem
+
+  .navbar-logo-wrapper
+    transform: translateX(0);
+    width: calc(50% - 384px);
+
+    .navbar-left
+      width: 16rem;
+      padding-left: 1.2rem;
+      // height: 3.2rem;
+      position: absolute;
+      right: 0;
+
+
   a, span, img
     display inline-block
   .logo

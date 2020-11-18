@@ -46,8 +46,9 @@ export default {
 <style lang="postcss">
 .right-bar {
   @apply w-64 absolute right-0 top-0 bottom-0 hidden;
+  background-color: red;
 
-  .sidebar-heading {
+  .right-sidebar-heading {
     @apply text-xs mx-0 tracking-wide uppercase;
     padding: 0.35rem 0;
     border-left: none;
@@ -61,16 +62,16 @@ export default {
     color: #a0aec0;
   }
 
-  .sidebar-links {
+  .right-sidebar-links {
     @apply ml-0 pl-0 pb-4 overflow-y-auto;
     max-height: calc(100vh - 6.5rem);
 
-    .sidebar-links {
+    .right-sidebar-links {
       @apply pb-0;
       max-height: none;
     }
 
-    .sidebar-link {
+    .right-sidebar-link {
       @apply mx-0 px-0 border-0 pr-4;
       color: var(--sidebar-link-color);
 
@@ -99,9 +100,9 @@ export default {
 
 @screen xxl {
   .right-bar {
-    .sidebar-links {
+    .right-sidebar-links {
       max-height: calc(100vh - 12.5rem);
-      .sidebar-links {
+      .right-sidebar-links {
         @apply pb-0;
         max-height: none;
       }

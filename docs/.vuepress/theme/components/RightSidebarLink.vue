@@ -68,7 +68,7 @@ function renderLink(h, to, text, active, level) {
     },
     class: {
       active,
-      "sidebar-link": true,
+      "right-sidebar-link": true,
     },
   };
 
@@ -106,7 +106,7 @@ function renderExternal(h, to, text) {
         rel: "noopener noreferrer",
       },
       class: {
-        "sidebar-link": true,
+        "right-sidebar-link": true,
       },
     },
     [text, h("OutboundLink")]
@@ -120,15 +120,12 @@ function renderExternal(h, to, text) {
   font-size: 0.95em;
 }
 
-li {
-  margin-top: .75rem;
-}
 
-a.sidebar-link {
-  @apply px-4;
-  /* @apply px-2 py-1 font-normal inline-block w-full box-border; */
-  color: var(--sidebar-link-color);
-  /* line-height: 1.4; */
+a.right-sidebar-link {
+  /* @apply px-4; */
+  @apply px-2 py-1 font-normal inline-block w-full box-border;
+  /* color: var(--sidebar-link-color); */
+  line-height: 1.4;
   transition: all 0.25s ease-out;
   color: var(--heading-color);
   transition: color 0.15s ease;

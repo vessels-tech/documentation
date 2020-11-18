@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="items.length" class="sidebar-links pl-0">
+  <ul v-if="items.length" class="right-sidebar-links pl-0">
     <li v-for="(item, i) in items" :key="i">
       <SidebarGroup
         v-if="item.type === 'group' && hasChildItems(item)"

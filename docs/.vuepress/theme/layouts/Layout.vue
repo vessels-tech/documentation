@@ -21,14 +21,7 @@
       class="sidebar-mask"
       @click="toggleSidebar(false)"
     />
-<!-- 
-    <LeftBar
-      :items="sidebarItems"
-      :extra-items="extraSidebarItems"
-      @toggle-sidebar="toggleSidebar"
-      @select-version="handleVersionUpdate"
-      @select-language="handleLanguageUpdate"
-    /> -->
+
     <Sidebar
       :items="sidebarItems"
       @toggle-sidebar="toggleSidebar"
@@ -55,7 +48,7 @@
         </template>
       </Page>
     </div>
-    <RightBar :heading-items="headingItems" />
+    <RightBar v-show="shouldShowRightBar" :heading-items="headingItems" />
   </div>
 </template>
 
@@ -86,7 +79,9 @@
 
 /* Seems to be changing the width... */
 .main-container {
-  @apply mx-auto relative max-w-screen-md;
+  /* TODO: fix for hiding toc */
+  /* @apply mx-auto relative max-w-screen-md; */
+  @apply mx-auto relative;
 }
 
 .top-bar {
@@ -125,10 +120,19 @@
   }
 }
 
+/* Make the content bigger if we hide the toc */
+.no-toc {
+  @apply py-8 px-10;
+  /* TODO: find better alternative to this hack */
+  max-width: 100% !important;
+  margin-left: calc(50% - 384px) !important;
+}
+
 .theme-default-content:not(.custom),
 .content-wrapper {
   @apply py-8 px-10 max-w-screen-md;
 }
+
 
 @screen lg {
   .main-container {
@@ -151,11 +155,10 @@
 <script>
 import "../styles/index.pcss";
 import Home from '@parent-theme/components/Home.vue'
-import Navbar from '@parent-theme/components/Navbar.vue'
-import Page from '@parent-theme/components/Page.vue'
+import Navbar from '../components/Navbar.vue'
+// import Page from '@parent-theme/components/Page.vue'
+import Page from '../components/Page.vue'
 import Sidebar from '../components/Sidebar.vue'
-// import Sidebar from '@parent-theme/components/Sidebar.vue'
-// import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
 
 import { resolveSidebarItems, resolveHeaders } from '../util'
@@ -206,6 +209,16 @@ export default {
         && frontmatter.sidebar !== false
         && this.sidebarItems.length
       )
+    },
+
+    shouldShowRightBar () {
+      const { frontmatter } = this.$page
+      // defaults to true if not specified
+      if (frontmatter.showToc === undefined || frontmatter.showToc === true) {
+        return true
+      }
+
+      return false;
     },
 
     sidebarItems () {

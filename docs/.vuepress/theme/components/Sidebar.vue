@@ -30,8 +30,6 @@ export default {
 <style lang="stylus">
 
 .sidebar
-  background-color: red;
-
   .sidebar-inner
     // make it right aligned inside sidebar!  
     width: 16rem;

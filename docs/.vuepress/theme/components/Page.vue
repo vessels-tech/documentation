@@ -2,7 +2,9 @@
   <main class="page">
     <slot name="top" />
 
-    <Content class="theme-default-content" />
+    <!-- TODO: switch -->
+    <Content v-if="shouldShowRightBar" class="theme-default-content"/>
+    <Content v-else class="theme-default-content no-toc"/>
     <PageEdit />
 
     <PageNav v-bind="{ sidebarItems }" />
@@ -12,12 +14,24 @@
 </template>
 
 <script>
-import PageEdit from '@theme/components/PageEdit.vue'
-import PageNav from '@theme/components/PageNav.vue'
+import PageEdit from '@parent-theme/components/PageEdit.vue'
+import PageNav from '@parent-theme/components/PageNav.vue'
 
 export default {
   components: { PageEdit, PageNav },
-  props: ['sidebarItems']
+  props: ['sidebarItems'],
+  computed: {
+    shouldShowRightBar () {
+      const { frontmatter } = this.$page
+      // defaults to true if not specified
+      if (frontmatter.showToc === undefined || frontmatter.showToc === true) {
+        return true
+      }
+
+      return false;
+    },
+
+  }
 }
 </script>
 

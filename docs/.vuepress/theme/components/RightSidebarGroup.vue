@@ -11,7 +11,7 @@
   >
     <RouterLink
       v-if="item.path"
-      class="sidebar-heading clickable"
+      class="right-sidebar-heading clickable"
       :class="{
         open,
         active: isActive($route, item.path),
@@ -25,7 +25,7 @@
 
     <p
       v-else
-      class="sidebar-heading"
+      class="right-sidebar-heading"
       :class="{ open }"
       @click="$emit('toggle')"
     >
@@ -81,7 +81,7 @@ export default {
   }
 
   &:not(.collapsable) {
-    .sidebar-heading:not(.clickable) {
+    .right-sidebar-heading:not(.clickable) {
       @apply cursor-auto;
       color: inherit;
     }
@@ -90,7 +90,7 @@ export default {
   &.is-sub-group {
     padding-left: 0;
 
-    & > .sidebar-heading {
+    & > .right-sidebar-heading {
       @apply font-normal pl-8;
       font-size: 0.95em;
       line-height: 1.4;
@@ -110,7 +110,7 @@ export default {
   }
 }
 
-.sidebar-heading {
+.right-sidebar-heading {
   @apply px-4 cursor-pointer font-bold m-0 box-border w-full;
   /* TODO: make nice fade again? */
   color: var(--heading-color);
