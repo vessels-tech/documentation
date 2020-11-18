@@ -10,8 +10,7 @@ The central ledger is a series of services that facilitate clearing and settleme
 
 ### 1.1 Architecture overview
 
-![Central-Ledger Architecture](assets/diagrams/architecture/Arch-mojaloop-central-ledger.svg)
-
+![Central-Ledger Architecture](./assets/diagrams/architecture/Arch-mojaloop-central-ledger.svg)
 ## 2. Transfers End-to-End Architecture
 
 

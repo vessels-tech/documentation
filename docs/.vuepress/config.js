@@ -1,22 +1,80 @@
+const { assert } = require('console');
+const tree = require('directory-tree');
+const path = require('path');
+
+function childrenForChildren(rootPath, grandChild) {
+  if (!grandChild) {
+    return null;
+  }
+
+  console.log("getting grandchildren", grandChild)
+  let children
+  if (grandChild.children) {
+    // children = grandChild.children
+    //   .filter(thing => thing.name !== 'README.md')
+    //   .filter(thing => thing.name !== 'assets')
+    //   .map(greatGrandChild => childrenForChildren(`${rootPath}/${grandChild.name}`, greatGrandChild))
+  }
+
+  return {
+    path: `${path.join(rootPath, grandChild.name.replace('.md', ''))}`,
+    title: grandChild.name,
+    children
+  }
+
+}
+
+function childrenForPath (rootPath) {
+  // iterare through dirs, build out
+  console.log('rendering path ', rootPath)
+  const fullRootPath = path.join(__dirname, '../../docs', rootPath)
+  console.log('rendering children ', fullRootPath)
+  // TODO: better dynamic config?
+  // TODO: overview
+  const children = tree(fullRootPath, { extensions: /\.md/ }).children
+    .filter(thing => thing.name !== 'README.md')
+    .filter(thing => thing.name !== 'assets')
+    // just for now!
+    .filter(thing => thing.name === 'central-event-processor')
+
+
+  console.log('children', children)
+
+  const rendered = children
+    .map(child => {
+      return {
+        path: `${path.join(rootPath, child.name)}/`,
+        title: child.name,
+        children: child.children
+          .filter(thing => thing.name !== 'README.md')
+          .filter(thing => thing.name !== 'assets')
+          .map(grandChild => childrenForChildren(path.join(rootPath, child.name), grandChild))
+      }
+    })
+
+  console.log('rendered is', JSON.stringify(rendered, null, 2))
+
+  return rendered;
+
+  // return [
+    // TODO: this section is full of nested pages and sequence diagrams - how do we auto generate them?
+    // ['/mojaloop-technical-overview/central-ledger/', 'central-ledger'],
+    // {
+    //   title: 'central-ledger',
+    //   path: '/mojaloop-technical-overview/central-ledger/',
+    //   sidebarDepth: 0,
+    //   children: [
+    //     '/mojaloop-technical-overview/central-ledger/admin-operations/',
+    //     '/mojaloop-technical-overview/central-ledger/transfers/',
+    //   ]
+    // },
+  // ];
+}
+
+
 module.exports = {
   description: 'Just playing around',
   base: '/documentation/',
-  // theme: 'theme-default',
-  // themeConfig: {
-  //   // ...
-  //   codeLanguages: {
-  //     php: "PHP",
-  //     twig: "Twig",
-  //     // any other code language labels you want to include in code toggles...
-  //   },
-  // },
-  // markdown: {
-  //   anchor: { level: [2, 3] },
-  //   extendMarkdown(md) {
-  //     let markup = require("vuepress-theme-craftdocs/markup");
-  //     md.use(markup);
-  //   },
-  // },
   themeConfig: {
     home: true,
     // this file is copied out of `/public` for us
@@ -24,7 +82,6 @@ module.exports = {
     repo: "mojaloop/documentation",
     editLinks: true,
     editLinkText: "Edit this page on GitHub",
-    // TODO: make nice nav bar
     nav: [
       { text: 'Getting Started', link: '/getting_started/' },
       {
@@ -134,10 +191,7 @@ module.exports = {
         title: 'Technology Overview',
         path: '/mojaloop-technical-overview/',
         sidebarDepth: 0,    // optional, defaults to 1
-        children: [
-          // TODO: this section is full of nested pages and sequence diagrams - how do we auto generate them?
-          ['/mojaloop-technical-overview/central-ledger/', 'central-ledger'],
-        ],
+        children: childrenForPath('/mojaloop-technical-overview')
       },
       {
         title: 'API Reference',
