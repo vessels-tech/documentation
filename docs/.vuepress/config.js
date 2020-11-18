@@ -1,91 +1,5 @@
 const { assert } = require('console');
-const tree = require('directory-tree');
-const path = require('path');
-
-function childrenForChildren(rootPath, grandChild) {
-  if (!grandChild) {
-    return null;
-  }
-
-  // console.log("getting grandchildren", grandChild)
-  let children
-  if (grandChild.children) {
-    const filteredChildren = grandChild.children
-      .filter(thing => thing.name !== 'README.md')
-      .filter(thing => thing.name !== 'assets')
-    if (filteredChildren.length > 0) {
-      children = filteredChildren
-        .map(greatGrandChild => childrenForChildren(`${rootPath}/${grandChild.name}`, greatGrandChild))
-    }
-  }
-
-  return {
-    // TODO: when to put trailing slash?...
-    // tx-req-service needs it, but sdk-scheme-adapter doesn't
-    // a folder with a readme NEEDS a slash
-    // a single filename needs to NOT have a slash
-    path: `${path.join(rootPath, grandChild.name.replace('.md', ''))}`,
-    title: grandChild.name.replace('.md', ''),
-    children
-  }
-}
-
-// TODO: clean this up
-/**
- * @function childrenForPath
- * @description Renders a sidebar for children based on a root path
- *  This is useful for directories which contain many children, 
- *  which is infeasible to maintain in a separate list
- * @param {string} rootPath - The root path to start rendering from
- */
-function childrenForPath (rootPath) {
-  // iterare through dirs, build out
-  console.log('rendering path ', rootPath)
-  const fullRootPath = path.join(__dirname, '../../docs', rootPath)
-  console.log('rendering children ', fullRootPath)
-  // TODO: better dynamic config?
-  // TODO: overview
-  const children = tree(fullRootPath, { extensions: /\.md/ }).children
-    .filter(thing => thing.name !== 'README.md')
-    .filter(thing => thing.name !== 'assets')
-    // just for now!
-    // .filter(thing => thing.name === 'central-bulk-transfers')
-    .filter(thing => thing.name === 'transaction-requests-service')
-
-
-  console.log('children', children)
-
-  const rendered = children
-    .map(child => {
-      return {
-        path: `${path.join(rootPath, child.name)}/`,
-        title: child.name,
-        children: child.children
-          .filter(thing => thing.name !== 'README.md')
-          .filter(thing => thing.name !== 'assets')
-          .map(grandChild => childrenForChildren(path.join(rootPath, child.name), grandChild))
-      }
-    })
-
-  console.log('rendered is', JSON.stringify(rendered, null, 2))
-
-  return rendered;
-
-  // return [
-    // TODO: this section is full of nested pages and sequence diagrams - how do we auto generate them?
-    // ['/mojaloop-technical-overview/central-ledger/', 'central-ledger'],
-    // {
-    //   title: 'central-ledger',
-    //   path: '/mojaloop-technical-overview/central-ledger/',
-    //   sidebarDepth: 0,
-    //   children: [
-    //     '/mojaloop-technical-overview/central-ledger/admin-operations/',
-    //     '/mojaloop-technical-overview/central-ledger/transfers/',
-    //   ]
-    // },
-  // ];
-}
-
+const { childrenForPath } = require('./util');
 
 module.exports = {
   description: 'Just playing around',
@@ -145,9 +59,6 @@ module.exports = {
       { text: 'Releases', link: 'https://github.com/mojaloop/helm/releases' },
     ],
     displayAllHeaders: false,
-    // Note:
-    // This could very well be improved, I just want to get started
-    // so we can compare the tools effectively
     sidebar: [
       {
         title: 'Home',
@@ -206,6 +117,7 @@ module.exports = {
         title: 'Technology Overview',
         path: '/mojaloop-technical-overview/',
         sidebarDepth: 0,    // optional, defaults to 1
+        // Render dynamically based on file paths
         children: childrenForPath('/mojaloop-technical-overview')
       },
       {
