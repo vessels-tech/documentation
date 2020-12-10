@@ -11,15 +11,16 @@ const path = require('path');
  */
 function childrenForPath(rootPath) {
   // iterare through dirs, build out
-  console.log('rendering path ', rootPath)
+  // TODO: clean up
+  // console.log('rendering path ', rootPath)
   const fullRootPath = path.join(__dirname, '../../docs', rootPath)
-  console.log('rendering children ', fullRootPath)
+  // console.log('rendering children ', fullRootPath)
 
   const children = tree(fullRootPath, { extensions: /\.md/ }).children
     .filter(child => child.name.toLowerCase() !== 'readme.md')
     .filter(thing => thing.name !== 'assets')
 
-  console.log('children', children)
+  // console.log('children', children)
 
   const rendered = children
     .map(child => {
@@ -33,23 +34,9 @@ function childrenForPath(rootPath) {
       }
     })
 
-  console.log('rendered is', JSON.stringify(rendered, null, 2))
+  // console.log('rendered is', JSON.stringify(rendered, null, 2))
 
   return rendered;
-
-  // return [
-  // TODO: this section is full of nested pages and sequence diagrams - how do we auto generate them?
-  // ['/mojaloop-technical-overview/central-ledger/', 'central-ledger'],
-  // {
-  //   title: 'central-ledger',
-  //   path: '/mojaloop-technical-overview/central-ledger/',
-  //   sidebarDepth: 0,
-  //   children: [
-  //     '/mojaloop-technical-overview/central-ledger/admin-operations/',
-  //     '/mojaloop-technical-overview/central-ledger/transfers/',
-  //   ]
-  // },
-  // ];
 }
 
 function childrenForChildren(rootPath, grandChild) {
