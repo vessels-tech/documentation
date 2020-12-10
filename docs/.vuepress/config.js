@@ -3,6 +3,7 @@ const { childrenForPath } = require('./util');
 
 module.exports = {
   description: 'Open Source Software for Financial Inclusion',
+  // we may need this... but it seems to mess up the asset rendering
   // base: '/documentation/',
   themeConfig: {
     home: true,
@@ -12,7 +13,7 @@ module.exports = {
     editLinks: true,
     editLinkText: "Edit this page on GitHub",
     nav: [
-      { text: 'Getting Started', link: '/getting_started/' },
+      { text: 'Home', link: '/' },
       {
         text: 'Guides',
         ariaLabel: 'Guides',
@@ -20,16 +21,18 @@ module.exports = {
           {
             text: 'General',
             items: [
-              { text: 'Up and Running With Mojaloop', link: '/getting_started/' },
+              { text: 'Up and Running With Mojaloop', link: '/deployment-guide/' },
               { text: 'Contributing to Mojaloop', link: '/contributors-guide/new-contributor-checklist' },
-              { text: 'Deploying Mojaloop Locally', link: '/deployment-guide/' },
+              // { text: 'Deploying Mojaloop Locally', link: '/deployment-guide/' },
             ]
           },
           {
-            text: 'Developers',
+            text: 'DFSPs',
             items: [
-              { text: 'Integrating my DFSP with a Deployment', link: '/getting_started/' },
-              { text: 'PISP development guide', link: '/getting_started/' },
+              { text: 'Testing my DFSP with the Testing Toolkit', link: 'https://github.com/mojaloop/ml-testing-toolkit/blob/master/documents/User-Guide.md' },
+              { text: 'Speed Up Development with the SDK-Scheme-Adapter', link: 'https://github.com/mojaloop/sdk-scheme-adapter' },
+              // { text: 'Integrating my DFSP with Mojaloop', link: '/getting_started/' },
+              // { text: 'PISP development guide', link: '/getting_started/' },
             ]
           }
         ]
@@ -64,11 +67,11 @@ module.exports = {
       {
         title: 'Home',
         children: [
-          '/home',
+          '/',
           ['/mojaloop-background', 'Background'],
         ]
       },
-      ['/getting_started', 'Getting Started'],
+      // ['/getting_started', 'Getting Started'],
       {
         title: 'Deployment Guide',
         path: '/deployment-guide/',
@@ -117,7 +120,7 @@ module.exports = {
       {
         title: 'Technology Overview',
         path: '/mojaloop-technical-overview/',
-        sidebarDepth: 0,    // optional, defaults to 1
+        sidebarDepth: 0,
         // Render dynamically based on file paths
         children: childrenForPath('/mojaloop-technical-overview')
       },
@@ -133,7 +136,7 @@ module.exports = {
               // Just as examples, we probably don't want thirdparty-api stuff here just yet
               [ '/api/thirdparty-pisp', 'Thirdparty-PISP v0.1'],
               [ '/api/thirdparty-dfsp', 'Thirdparty-DFSP v0.1'],
-              ['https://docs.mojaloop.io/mojaloop-specification/', 'Spec Documentation'],
+              ['https://docs.mojaloop.io/mojaloop-specification/', 'Mojaloop Specification'],
               ['https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html', 'FSPIOP API Definition']
             ]
           },
@@ -160,7 +163,12 @@ module.exports = {
         ],
         // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
       },
-      ['/contributors-guide/frequently-asked-questions', 'FAQs'],
+      {
+        title: 'FAQs',
+        path: '/contributors-guide/frequently-asked-questions',
+        sidebarDepth: 0,
+        collapsable: false
+      }
     ]
   },
   plugins: [

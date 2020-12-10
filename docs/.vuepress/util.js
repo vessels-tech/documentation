@@ -27,6 +27,7 @@ function childrenForPath(rootPath) {
       return {
         path: `${path.join(rootPath, child.name)}/`,
         title: child.name,
+        sidebarDepth: 0,
         children: child.children
           .filter(thing => thing.name !== 'README.md')
           .filter(thing => thing.name !== 'assets')
@@ -34,7 +35,6 @@ function childrenForPath(rootPath) {
       }
     })
 
-  // console.log('rendered is', JSON.stringify(rendered, null, 2))
 
   return rendered;
 }
@@ -68,6 +68,7 @@ function childrenForChildren(rootPath, grandChild) {
     // a single filename needs to NOT have a slash
     path: `${path.join(rootPath, grandChild.name.replace('.md', ''))}${hasChildReadmeMD ? '/' : ''}`,
     title: grandChild.name.replace('.md', ''),
+    sidebarDepth: 0,
     children
   }
 }
