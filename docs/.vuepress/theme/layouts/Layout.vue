@@ -77,11 +77,13 @@
   }
 }
 
-/* Seems to be changing the width... */
 .main-container {
+  margin-left: auto;
+  margin-right: auto;
+
   /* TODO: fix for hiding toc */
-  /* @apply mx-auto relative max-w-screen-md; */
-  @apply mx-auto relative;
+  @apply mx-auto relative max-w-screen-md;
+  /* @apply mx-auto relative; */
 }
 
 .top-bar {
@@ -97,10 +99,26 @@
   @apply text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
   top: 3.6rem;
   background-color: var(--sidebar-bg-color);
+  transform: translateX(-16);
 
-  /* TODO: do breaks and stuff for different screen sizes*/
-  transform: translateX(0);
-  width: calc(50% - 384px);
+  /* @screen lg {
+    width: calc(50% - 256px);
+    transform: translateX(0);
+  }
+
+  @screen xl {
+    width: calc(50% - 384px);
+    transform: translateX(0);
+  } */
+}
+
+.navbar {
+  .navbar-logo-wrapper {
+    display: none;
+    @apply text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
+    top: 12px;
+    height: 3rem;
+  }
 }
 
 .sidebar-open {
@@ -133,7 +151,7 @@
   @apply py-8 px-10 max-w-screen-md;
 }
 
-
+/* 1024 -> 1280px */
 @screen lg {
   .main-container {
     @apply relative;
@@ -143,13 +161,25 @@
   .left-bar {
     transform: translateX(0);
   }
+
+  .navbar {
+    .navbar-logo-wrapper {
+      display: block;
+    }
+  }
 }
 
+/* 1280px */
 @screen xl {
   .main-container {
     left: 0;
   }
 }
+
+/* 1280px
+@screen xxl {
+
+} */
 </style>
 
 <script>

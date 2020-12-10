@@ -105,16 +105,16 @@ $navbar-horizontal-padding = 1.5rem
   line-height $navbarHeight - 1.4rem
 
   .navbar-logo-wrapper
-    transform: translateX(0);
-    width: calc(50% - 384px);
+    // transform: translateX(0);
+    // width: calc(50% - 384px);
 
     .navbar-left
+      display: block
       width: 16rem;
       padding-left: 1.2rem;
       // height: 3.2rem;
       position: absolute;
       right: 0;
-
 
   a, span, img
     display inline-block
@@ -145,6 +145,8 @@ $navbar-horizontal-padding = 1.5rem
 @media (max-width: $MQMobile)
   .navbar
     padding-left 4rem
+    .navbar-logo-wrapper
+      // display none
     .can-hide
       display none
     .links
