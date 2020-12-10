@@ -151,17 +151,35 @@ module.exports = {
           }
         ]
       },
-      // TODO: I don't think these belong here - isn't this what community.mojaloop.io is for?
       {
         title: 'Discussions & Notes',
         collapsable: true, // optional, defaults to true
         sidebarDepth: 0,    // optional, defaults to 1
         children: [
-          ['/discussions/', 'Discussions'],
+          {
+            title: 'Discussions',
+            path: '/discussions/',
+            collapsable: true,
+            sidebarDepth: 0,
+            children: [
+              [ '/discussions/ISO_Integration', 'ISO Integration'],
+              [ '/discussions/decimal', 'Decimals'],
+              [ '/discussions/workbench', 'Sandboxes/Workbenches'],
+            ]
+          },
           ['/code_quality_security/', 'Code Quality + Security'],
-          ['/meeting-notes/', 'Meeting Notes']
+          {
+            title: 'Meeting Notes',
+            path: '/meeting-notes/',
+            collapsable: true,
+            sidebarDepth: 0,
+            children: [
+              ['/meeting-notes/ccb-notes', 'Change Control Board'],
+              ['/meeting-notes/da-notes', 'Design Authority'],
+              ['/meeting-notes/scrum-of-scrum-notes', 'Scrum of Scrums'],
+            ]
+          },
         ],
-        // initialOpenGroupIndex: -1 // optional, defaults to 0, defines the index of initially opened subgroup
       },
       {
         title: 'FAQs',

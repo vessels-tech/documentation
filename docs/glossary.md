@@ -1,4 +1,6 @@
-# Glossary of Terms
+# Concepts
+
+## Glossary
 
 | Term | Definition | Notes |
 | --- | --- | --- |
