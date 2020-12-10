@@ -38,3 +38,9 @@ npm run docs:dev
 ## Making changes to the Vuepress theme
 
 [todo - add instructions and links here]
+
+Our theme inherits from the default vuepress theme, with the following additions
+
+- left sidebar, and page-level toc inspired by https://github.com/pixelandtonic/vuepress-theme-craftdocs
+- custom swagger-ui, inspired by https://docs.zaikio.com/api/directory/directory.html
+- 

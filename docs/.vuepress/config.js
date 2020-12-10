@@ -2,8 +2,8 @@ const { assert } = require('console');
 const { childrenForPath } = require('./util');
 
 module.exports = {
-  description: 'Just playing around',
-  base: '/documentation/',
+  description: 'Open Source Software for Financial Inclusion',
+  // base: '/documentation/',
   themeConfig: {
     home: true,
     // this file is copied out of `/public` for us
@@ -59,6 +59,7 @@ module.exports = {
       { text: 'Releases', link: 'https://github.com/mojaloop/helm/releases' },
     ],
     displayAllHeaders: false,
+    /* Left Sidebar */
     sidebar: [
       {
         title: 'Home',
@@ -174,12 +175,6 @@ module.exports = {
     // Beta - export site as PDF
     // https://github.com/ulivz/vuepress-plugin-export
     'vuepress-plugin-export',
-
-    // Floating TOC
-    // https://github.com/xuekai-china/vuepress-plugin-right-anchor
-    // TODO: format nicer?
-    // 'vuepress-plugin-right-anchor'
-
   ],
   // Configure webpack for custom rendering (e.g. OpenAPI/Swagger Plugin)
   configureWebpack: (config, isServer) => {
