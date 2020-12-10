@@ -1,19 +1,7 @@
 # Mojaloop Deployment
 
 The document is intended for an audience with a stable technical knowledge that would like to setup an environment for development, testing and contributing to the Mojaloop project.
-
-## Deployment and Setup
-
-- [Pre-requisites](#1-pre-requisites)
-- [Kubernetes](#3-kubernetes)
-  - [Kubernetes Dashboard](#31-kubernetes-dashboard)
-- [Helm](#4-helm)
-  - [Helm configuration](#41-helm-configuration)
-- [Postman](#6-postman)
-  - [Installing Postman](#61-installing-postman)
-  - [Setup Postman](#62-setup-postman)
-  
-### 1. Pre-requisites
+## 1. Pre-requisites
 
 Versions numbers below are hard requirements, not just recommendations (more recent versions are known not to work).
 
@@ -39,7 +27,7 @@ For **local guides** on how to setup the pre-requisites on your laptop or deskto
 - [Local Setup for Linux](local-setup-linux.md)
 - [Local Setup for Windows](local-setup-windows.md)
 
-### 2. Deployment Recommendations
+## 2. Deployment Recommendations
 
 This provides environment resource recommendations with a view of the infrastructure architecture.
 
@@ -68,7 +56,7 @@ This provides environment resource recommendations with a view of the infrastruc
 
 ![Mojaloop Deployment Recommendations - Infrastructure Architecture](./assets/diagrams/deployment/KubeInfrastructureArch.svg)
 
-### 3. Kubernetes
+## 3. Kubernetes
 
 This section will guide the reader through the deployment process to setup Kubernetes.
 
@@ -89,7 +77,7 @@ The following are Kubernetes concepts used within the project. An understanding 
 
 Insure **kubectl** is installed. A complete set of installation instruction are available [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
-#### 3.1. Kubernetes Dashboard:
+### 3.1. Kubernetes Dashboard:
 
 1. Kubernetes Dashboard roles, services & deployment.
 
@@ -138,7 +126,7 @@ Insure **kubectl** is installed. A complete set of installation instruction are 
 
 ![kubernetes-dashboard](./assets/diagrams/deployment/kubernetesDashboard.png)
 
-### 4. Helm 
+## 4. Helm 
 
 Please review [Mojaloop Helm Chart](../repositories/helm.md) to understand the relationships between the deployed Mojaloop helm charts.
 
@@ -148,7 +136,7 @@ Refer to the following document if are using Helm v2: [Deployment with (Deprecat
 
 Refer to the [Helm v2 to v3 Migration Guide](./helm-legacy-migration.md) if you wish to migrate an existing Helm v2 deployment to v3.
 
-#### 4.1. Helm configuration
+### 4.1. Helm configuration
 
 1. Add mojaloop repo to your Helm config:
    ```bash
@@ -174,9 +162,9 @@ Refer to the [Helm v2 to v3 Migration Guide](./helm-legacy-migration.md) if you 
    helm --namespace kube-public install stable/nginx-ingress
    ```
 
-### 5. Mojaloop
+## 5. Mojaloop
 
-#### 5.1. Mojaloop Helm Deployment
+### 5.1. Mojaloop Helm Deployment
 
 1. Install Mojaloop:
 
@@ -202,7 +190,7 @@ Refer to the [Helm v2 to v3 Migration Guide](./helm-legacy-migration.md) if you 
 
    _Note: Download and customize the [values.yaml](https://github.com/mojaloop/helm/blob/master/mojaloop/values.yaml). Also ensure that you are using the value.yaml from the correct version which can be found via [Helm Releases](https://github.com/mojaloop/helm/releases)._
 
-#### 5.2. Verifying Mojaloop Deployment
+### 5.2. Verifying Mojaloop Deployment
 
 1. Update your /etc/hosts for local deployment:
 
@@ -244,15 +232,15 @@ Refer to the [Helm v2 to v3 Migration Guide](./helm-legacy-migration.md) if you 
    http://central-ledger.local/health
    ``` 
 
-### 6. Postman
+## 6. Postman
 
 Postman is used to send requests and receive responses.
 
-#### 6.1. Installing Postman
+### 6.1. Installing Postman
 
 Please, follow these instructions: [Get Postman](https://www.getpostman.com/postman) and install the Postman application.
 
-#### 6.2. Setup Postman
+### 6.2. Setup Postman
 
 Grab the latest collections & environment files from [Mojaloop Postman Github repo](https://github.com/mojaloop/postman).
  
