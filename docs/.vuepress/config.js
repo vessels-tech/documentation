@@ -66,9 +66,12 @@ module.exports = {
     sidebar: [
       {
         title: 'Home',
+        sidebarDepth: 0,
         children: [
           '/',
           ['/mojaloop-background', 'Background'],
+          ['/mojaloop-background/core-scenarios', 'Core Scenarios'],
+          ['/mojaloop-background/level-one-principles', 'Level One Principles'],
         ]
       },
       // ['/getting_started', 'Getting Started'],
